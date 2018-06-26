@@ -3,8 +3,8 @@ Dr Scheme kqml mars explorer.
 
 KQML Mars Explorer
 
- Originally developed for [Dr Scheme] (http://plt-scheme.org/software/drscheme/)
- It can be run on [Dr Racket] (https://racket-lang.org/) with Language set to Pretty Big.
+ Originally developed for [Dr Scheme](http://plt-scheme.org/software/drscheme/)
+ It can be run on [Dr Racket](https://racket-lang.org/) with Language set to Pretty Big.
  I found this code on an backup hard drive. I wrote this for a Computer Vision class.
 
 Run with:
