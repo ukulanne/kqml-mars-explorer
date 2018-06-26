@@ -21,11 +21,13 @@
 ;; You should have received a copy of the GNU General Public License
 ;; along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-;; KQML Mars Explorer
+;; More kqml info can be found at:
 ;; https://www.csee.umbc.edu/csee/research/kqml/
 
 ;; Originally developed for Dr Scheme
 ;; It can be run on Dr Racket with Language set to Pretty Big.
+
+(define (display-msg obj) (display obj)(newline))
 
 ;; Frame
 (define frame (instantiate frame% ("Mars Explorer") (width 500) (height 500)))
@@ -194,8 +196,6 @@
                 (else y)))))
     )))
             
-            
-  
   ;; Check if we are now inside our main starship
   (define (craft? coords)(and (zero? (car coords)) (zero? (cadr coords))))
   
@@ -239,7 +239,7 @@
             (x-amount (fourth explorer)) ;;amount has the free space 
             (remain (- (third the-mineral) x-amount)) ;; what remains on the mount need to be checked 
             (new-mineral (list (car the-mineral) (cadr the-mineral) remain)))
-      ;;(display (list "i am mineral remaining" the-mineral x-amount remain))
+      (display-msg (list "mineral-remaining" the-mineral x-amount remain))
       
       ;; We substract the minerals to be loaded inside the explorer
       (set! minerals (change-minerals my-minerals the-mineral new-mineral '()))
@@ -250,13 +250,13 @@
             (set! msg (cons `(kqml 'message "mineral-found" 'coords ,(car coords) ,(cadr coords)) 
                           msg))  
             (if kqml-flag
-                (display (car msg))))
+                (display-msg (car msg))))
           
           ;; if the mineral from the mound is exhausted then we tell our buddies not to come here anymore
           (begin 
             (set! msg '()) 
              (if kqml-flag
-                 (display `(kqml 'message "mineral-exhausted" 'coords ,(car coords) ,(cadr coords))))))
+                 (display-msg `(kqml 'message "mineral-exhausted" 'coords ,(car coords) ,(cadr coords))))))
       
       ;; The new explorer data    
       (list (car explorer) (cadr explorer) (third explorer) 0)))
@@ -277,7 +277,7 @@
   ;;Grab the new action for each explorer 
   (define (next) 
     (set! explorers (map fetch-explorer-movement explorers)))
-  ;;(display (cons "soy la nave "explorers))
+  ;; (display-msg (cons "explorer-locations " explorers))
   (if flag
       (begin 
         (set! kqml-flag
@@ -309,7 +309,7 @@
   ;; or if the main starship is full.
   
   (if (or (zero? start) (<= (third craft) 0)) ;; needs to be checked to see all crafts return :)
-      (display "end")
+      (display-msg "(end)")
       (main (- start 1) #f type)))
 
 ;; With rovers and messages
